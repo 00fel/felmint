@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De fel, te amo mia para siempre 💛</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at center, #1e1b18 0%, #0c0a09 100%);
+      overflow-x: hidden;
+      color: #f3f4f6;
+    }
+
+    .dark-card-shadow {
+      box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.08), 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Floating ambient petals */
+    .petal {
+      position: absolute;
+      pointer-events: none;
+      animation: floatPetal 10s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatPetal {
+      0% {
+        transform: translateY(-10vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Gentle pulsing effect for bouquet */
+    .bounce-gentle {
+      animation: bounceGentle 4s ease-in-out infinite;
+    }
+
+    @keyframes bounceGentle {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+
+    /* Bunny subtle movement */
+    .bunny-anim {
+      animation: bunnyJoy 3s ease-in-out infinite;
+    }
+
+    @keyframes bunnyJoy {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.02) rotate(-1.5deg); }
+    }
+
+    /* Burst animation on click */
+    .burst-particle {
+      position: absolute;
+      pointer-events: none;
+      animation: burst 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+
+    @keyframes burst {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.5) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(1.3) rotate(var(--dr));
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 relative selection:bg-amber-900 selection:text-amber-200">
+
+  <!-- Background Petals Container -->
+  <div id="petals-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+  <main id="card" class="relative z-10 bg-[#121212] border border-amber-500/20 rounded-3xl p-6 sm:p-10 md:p-12 max-w-xl w-full text-center dark-card-shadow transition-all duration-300">
+    
+    <!-- Main Text: De fel -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-amber-400 tracking-tight mb-2 sm:mb-4">
+      De fel
+    </h1>
+
+    <div class="relative my-6 sm:my-8 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 cursor-pointer group" id="interactive-zone">
+      
+      <!-- Yellow Flower Bouquet SVG -->
+      <div class="relative bounce-gentle transition-transform duration-300 group-hover:scale-105">
+        <svg class="w-48 h-56 sm:w-56 sm:h-64 drop-shadow-[0_10px_20px_rgba(251,191,36,0.15)]" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Wrapping Paper Base -->
+          <path d="M70 140 L100 230 L130 140 Z" fill="#FBBF24" stroke="#D97706" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M50 110 C 60 150, 90 220, 100 230 C 110 220, 140 150, 150 110 Z" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+          
+          <!-- Ribbon Ribbon -->
+          <path d="M85 155 Q100 165 115 155 Q100 145 85 155" fill="#EF4444"/>
+          <path d="M100 155 C90 170, 75 185, 70 195" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+          <path d="M100 155 C110 170, 125 185, 130 195" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="100" cy="155" r="6" fill="#DC2626"/>
+
+          <!-- Foliage / Leaves -->
+          <path d="M60 110 Q 40 90 45 70 Q 75 80 60 110" fill="#10B981"/>
+          <path d="M140 110 Q 160 90 155 70 Q 125 80 140 110" fill="#10B981"/>
+          <path d="M100 100 Q 100 60 110 50 Q 120 70 100 100" fill="#059669"/>
+          
+          <!-- Flower 1 (Center Top Sunflower) -->
+          <g transform="translate(100, 70)">
+            <!-- Petals -->
+            <g fill="#F59E0B">
+              <ellipse cx="0" cy="-28" rx="8" ry="16"/>
+              <ellipse cx="0" cy="28" rx="8" ry="16"/>
+              <ellipse cx="-28" cy="0" rx="16" ry="8"/>
+              <ellipse cx="28" cy="0" rx="16" ry="8"/>
+              <ellipse cx="-20" cy="-20" rx="9" ry="16" transform="rotate(-45 -20 -20)"/>
+              <ellipse cx="20" cy="-20" rx="9" ry="16" transform="rotate(45 20 -20)"/>
+              <ellipse cx="-20" cy="20" rx="9" ry="16" transform="rotate(45 -20 20)"/>
+              <ellipse cx="20" cy="20" rx="9" ry="16" transform="rotate(-45 20 20)"/>
+            </g>
+            <g fill="#FBBF24">
+              <ellipse cx="0" cy="-26" rx="6" ry="13"/>
+              <ellipse cx="0" cy="26" rx="6" ry="13"/>
+              <ellipse cx="-26" cy="0" rx="13" ry="6"/>
+              <ellipse cx="26" cy="0" rx="13" ry="6"/>
+              <ellipse cx="-18" cy="-18" rx="7" ry="13" transform="rotate(-45 -18 -18)"/>
+              <ellipse cx="18" cy="-18" rx="7" ry="13" transform="rotate(45 18 -18)"/>
+              <ellipse cx="-18" cy="18" rx="7" ry="13" transform="rotate(45 -18 18)"/>
+              <ellipse cx="18" cy="18" rx="7" ry="13" transform="rotate(-45 18 18)"/>
+            </g>
+            <!-- Center -->
+            <circle cx="0" cy="0" r="14" fill="#451a03"/>
+            <circle cx="0" cy="0" r="11" fill="#78350f" stroke="#b45309" stroke-width="2" stroke-dasharray="3 2"/>
+          </g>
+
+          <!-- Flower 2 (Left Yellow Flower) -->
+          <g transform="translate(62, 92)">
+            <g fill="#F59E0B">
+              <ellipse cx="0" cy="-22" rx="7" ry="13"/>
+              <ellipse cx="0" cy="22" rx="7" ry="13"/>
+              <ellipse cx="-22" cy="0" rx="13" ry="7"/>
+              <ellipse cx="22" cy="0" rx="13" ry="7"/>
+              <ellipse cx="-15" cy="-15" rx="7" ry="13" transform="rotate(-45 -15 -15)"/>
+              <ellipse cx="15" cy="-15" rx="7" ry="13" transform="rotate(45 15 -15)"/>
+              <ellipse cx="-15" cy="15" rx="7" ry="13" transform="rotate(45 -15 15)"/>
+              <ellipse cx="15" cy="15" rx="7" ry="13" transform="rotate(-45 15 15)"/>
+            </g>
+            <circle cx="0" cy="0" r="11" fill="#78350f"/>
+            <circle cx="0" cy="0" r="8" fill="#FBBF24"/>
+          </g>
+
+          <!-- Flower 3 (Right Yellow Flower) -->
+          <g transform="translate(138, 92)">
+            <g fill="#F59E0B">
+              <ellipse cx="0" cy="-22" rx="7" ry="13"/>
+              <ellipse cx="0" cy="22" rx="7" ry="13"/>
+              <ellipse cx="-22" cy="0" rx="13" ry="7"/>
+              <ellipse cx="22" cy="0" rx="13" ry="7"/>
+              <ellipse cx="-15" cy="-15" rx="7" ry="13" transform="rotate(-45 -15 -15)"/>
+              <ellipse cx="15" cy="-15" rx="7" ry="13" transform="rotate(45 15 -15)"/>
+              <ellipse cx="-15" cy="15" rx="7" ry="13" transform="rotate(45 -15 15)"/>
+              <ellipse cx="15" cy="15" rx="7" ry="13" transform="rotate(-45 15 15)"/>
+            </g>
+            <circle cx="0" cy="0" r="11" fill="#78350f"/>
+            <circle cx="0" cy="0" r="8" fill="#FBBF24"/>
+          </g>
+
+          <!-- Sparkles -->
+          <circle cx="40" cy="50" r="3" fill="#FACE15"/>
+          <circle cx="160" cy="50" r="4" fill="#FACE15"/>
+          <circle cx="100" cy="20" r="3.5" fill="#FACE15"/>
+        </svg>
+      </div>
+
+      <!-- Cute Bunny SVG -->
+      <div class="bunny-anim transition-transform duration-300 group-hover:scale-105">
+        <svg class="w-36 h-44 sm:w-40 sm:h-48 drop-shadow-md" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bunny Ears -->
+          <!-- Left Ear -->
+          <path d="M55 70 C 35 10, 15 20, 45 10 C 55 20, 65 50, 60 70 Z" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="2"/>
+          <path d="M50 65 C 38 20, 25 25, 43 18 C 50 25, 56 48, 54 65 Z" fill="#FBCFE8"/>
+          
+          <!-- Right Ear -->
+          <path d="M105 70 C 125 10, 145 20, 115 10 C 105 20, 95 50, 100 70 Z" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="2"/>
+          <path d="M110 65 C 122 20, 135 25, 117 18 C 110 25, 104 48, 106 65 Z" fill="#FBCFE8"/>
+
+          <!-- Bunny Body -->
+          <ellipse cx="80" cy="145" rx="42" ry="38" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="2"/>
+          <!-- Tummy -->
+          <ellipse cx="80" cy="148" rx="28" ry="24" fill="#FEF3C7"/>
+
+          <!-- Bunny Head -->
+          <ellipse cx="80" cy="95" rx="38" ry="32" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="2"/>
+
+          <!-- Eyes -->
+          <ellipse cx="66" cy="92" rx="4" ry="5.5" fill="#1F2937"/>
+          <circle cx="67.5" cy="90.5" r="1.5" fill="#FFFFFF"/>
+          
+          <ellipse cx="94" cy="92" rx="4" ry="5.5" fill="#1F2937"/>
+          <circle cx="95.5" cy="90.5" r="1.5" fill="#FFFFFF"/>
+
+          <!-- Cheeks -->
+          <ellipse cx="58" cy="100" rx="6" ry="4" fill="#F472B6" opacity="0.7"/>
+          <ellipse cx="102" cy="100" rx="6" ry="4" fill="#F472B6" opacity="0.7"/>
+
+          <!-- Nose and Mouth -->
+          <polygon points="80,98 76,94 84,94" fill="#EC4899"/>
+          <path d="M80 98 L80 102 C77 105, 73 103, 72 101 M80 102 C83 105, 87 103, 88 101" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Paws holding a small yellow flower -->
+          <ellipse cx="62" cy="132" rx="8" ry="6" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
+          <ellipse cx="98" cy="132" rx="8" ry="6" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
+
+          <!-- Little Yellow Flower Held by Bunny -->
+          <g transform="translate(80, 130)">
+            <circle cx="0" cy="-10" r="3.5" fill="#F59E0B"/>
+            <circle cx="0" cy="10" r="3.5" fill="#F59E0B"/>
+            <circle cx="-10" cy="0" r="3.5" fill="#F59E0B"/>
+            <circle cx="10" cy="0" r="3.5" fill="#F59E0B"/>
+            <circle cx="-7" cy="-7" r="3.5" fill="#FBBF24"/>
+            <circle cx="7" cy="-7" r="3.5" fill="#FBBF24"/>
+            <circle cx="-7" cy="7" r="3.5" fill="#FBBF24"/>
+            <circle cx="7" cy="7" r="3.5" fill="#FBBF24"/>
+            <circle cx="0" cy="0" r="5" fill="#78350F"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="mt-4 sm:mt-6">
+      <p class="text-xl sm:text-2xl md:text-3xl text-amber-100 font-normal tracking-wide">
+        te amo mia para siempre
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    // Create ambient floating petals in the background
+    function createAmbientPetals() {
+      const container = document.getElementById('petals-container');
+      const petalCount = 22;
+      
+      const colors = ['#FBBF24', '#F59E0B', '#FDE047', '#FEF08A'];
+
+      for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        
+        const size = Math.random() * 12 + 8;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.width = size + 'px';
+        petal.style.height = (size * 1.3) + 'px';
+        petal.style.backgroundColor = color;
+        petal.style.borderRadius = '50% 0% 50% 50%';
+        petal.style.animationDuration = (Math.random() * 6 + 7) + 's';
+        petal.style.animationDelay = (Math.random() * 8) + 's';
+
+        container.appendChild(petal);
+      }
+    }
+
+    // Burst effect on clicking the bouquet/bunny zone
+    function triggerBurst(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX || (rect.left + rect.width / 2);
+      const y = e.clientY || (rect.top + rect.height / 2);
+
+      const particleCount = 20;
+      const symbols = ['💛', '🌻', '✨', '💛', '✨'];
+
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.className = 'burst-particle text-xl sm:text-2xl';
+        p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        p.style.left = x + 'px';
+        p.style.top = y + 'px';
+
+        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5);
+        const speed = Math.random() * 120 + 60;
+        const dx = Math.cos(angle) * speed + 'px';
+        const dy = Math.sin(angle) * speed + 'px';
+        const dr = (Math.random() * 360 - 180) + 'deg';
+
+        p.style.setProperty('--dx', dx);
+        p.style.setProperty('--dy', dy);
+        p.style.setProperty('--dr', dr);
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+          p.remove();
+        }, 1200);
+      }
+    }
+
+    // Initialize events on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      createAmbientPetals();
+
+      const interactiveZone = document.getElementById('interactive-zone');
+      interactiveZone.addEventListener('click', triggerBurst);
+      interactiveZone.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        triggerBurst({
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          currentTarget: interactiveZone
+        });
+      }, { passive: true });
+    });
+  </script>
+</body>
+</html>
